@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ConsoleBox> Error 1`] = `"[1m[90m 1 [22m[39m[90m│[39m Error: error!"`;
+
+exports[`<ConsoleBox> Multi line 1`] = `
+"[1m[90m 1 [22m[39m[90m│[39m [33m12345[39m
+[1m[90m 2 [22m[39m[90m│[39m [33m12345[39m"
+`;
+
+exports[`<ConsoleBox> Single line 1`] = `"[1m[90m 1 [22m[39m[90m│[39m [33m12345[39m"`;
