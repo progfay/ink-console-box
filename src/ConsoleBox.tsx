@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { Box, useApp } from 'ink'
 import { Console } from 'console'
 import { Line } from './Line'
@@ -22,19 +22,19 @@ export const ConsoleBox: React.FC<ConsoleBoxProps> = ({ func, onSuccess, onFaile
     setLines(previous => [...previous, line])
   }, [])
 
+  const consoleRef = useRef<Console>(new Console({
+    stdout: new ConsoleStream(handler),
+    stderr: new ConsoleStream(handler),
+    colorMode: true
+  }))
+
   useEffect(() => {
     const run = async (func: Func): Promise<void> => {
-      const console = new Console({
-        stdout: new ConsoleStream(handler),
-        stderr: new ConsoleStream(handler),
-        colorMode: true
-      })
-
       try {
-        await func(console)
+        await func(consoleRef.current)
         onSuccess?.()
       } catch (e) {
-        console.error(e.toString())
+        consoleRef.current.error(e.toString())
         onFailed?.(e as Error)
       }
     }
