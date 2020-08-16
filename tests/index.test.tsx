@@ -47,17 +47,30 @@ describe('<ConsoleBox>', () => {
   it('Error', async () => {
     const { callback, called } = waitCall()
 
+    const handlers = {
+      handleSuccess: () => {
+        callback()
+      },
+      handleFailed: () => {
+        callback()
+      }
+    }
+    const onSuccess = jest.spyOn(handlers, 'handleSuccess')
+    const onFailed = jest.spyOn(handlers, 'handleFailed')
+
     const { lastFrame } = render(
       <ConsoleBox
-        func={console => {
+        func={() => {
           throw Error('error!')
         }}
-        onSuccess={callback}
-        onFailed={callback}
+        onSuccess={handlers.handleSuccess}
+        onFailed={handlers.handleFailed}
       />
     )
 
     await called
     expect(lastFrame()).toMatchSnapshot()
+    expect(onSuccess).not.toHaveBeenCalled()
+    expect(onFailed).toHaveBeenCalled()
   })
 })
