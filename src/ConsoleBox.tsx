@@ -12,9 +12,10 @@ export interface ConsoleBoxProps extends BoxProps {
   func: Func
   onSuccess?: () => void
   onFailed?: (e: Error) => void
+  showLineNumber?: boolean
 }
 
-export const ConsoleBox: React.FC<ConsoleBoxProps> = ({ func, onSuccess, onFailed, ...boxProps }) => {
+export const ConsoleBox: React.FC<ConsoleBoxProps> = ({ func, onSuccess, onFailed, showLineNumber = true, ...boxProps }) => {
   const [lines, setLines] = useState<string[]>([])
   const { exit } = useApp()
 
@@ -49,7 +50,13 @@ export const ConsoleBox: React.FC<ConsoleBoxProps> = ({ func, onSuccess, onFaile
     <Box flexDirection='column' {...boxProps}>
       {
         lines.map((line, i) => (
-          <Line key={`line-${i}`} lineNumber={(i + 1).toString().padStart(maxLineNumberDigitLength, ' ')} text={line} />
+          <Line
+            key={`line-${i}`}
+            lineNumber={showLineNumber
+              ? (i + 1).toString().padStart(maxLineNumberDigitLength, ' ')
+              : undefined}
+            text={line}
+          />
         ))
       }
     </Box>
