@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'ink-testing-library'
-import { ConsoleBox } from '../lib'
+import { ConsoleBox } from '../src'
 
 const waitCall = (): { callback: () => void, called: Promise<void> } => {
   let callback: () => void = () => {}

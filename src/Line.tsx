@@ -13,17 +13,21 @@ export const Line: React.FC<LineProps> = ({ lineNumber, text }) => {
   const [height, setHeight] = useState<number>(0)
 
   useEffect(() => {
-    if (lineNumber !== undefined || ref.current === null) return
+    if (lineNumber === undefined || ref.current === null) return
     const { height } = measureElement(ref.current)
     setHeight(height)
   })
 
   return (
     <Box>
-      {lineNumber !== undefined && <Text color='gray' bold>{` ${lineNumber} `}</Text>}
-      <Box width={2}>
-        <Text color='gray'>{'│\n'.repeat(height).trimEnd()}</Text>
-      </Box>
+      {lineNumber !== undefined && (
+        <>
+          <Text color='gray' bold>{` ${lineNumber} `}</Text>
+          <Box width={2}>
+            <Text color='gray'>{'│\n'.repeat(height).trimEnd()}</Text>
+          </Box>
+        </>
+      )}
       <Box ref={ref}>
         <Text>{text}</Text>
       </Box>
