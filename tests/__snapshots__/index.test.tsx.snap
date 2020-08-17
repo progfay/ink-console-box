@@ -2,9 +2,26 @@
 
 exports[`<ConsoleBox> Error 1`] = `"[1m[90m 1 [22m[39m[90m│[39m Error: error!"`;
 
+exports[`<ConsoleBox> Hidden line number 1`] = `
+"[33m12345[39m
+[33m12345[39m"
+`;
+
+exports[`<ConsoleBox> Long line 1`] = `
+"[1m[90m 1 [22m[39m[90m│[39m loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+   [90m│[39m ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+   [90m│[39m ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+   [90m│[39m oooooooooooooooong"
+`;
+
 exports[`<ConsoleBox> Multi line 1`] = `
 "[1m[90m 1 [22m[39m[90m│[39m [33m12345[39m
 [1m[90m 2 [22m[39m[90m│[39m [33m12345[39m"
+`;
+
+exports[`<ConsoleBox> Single console.log include new line 1`] = `
+"[1m[90m 1 [22m[39m[90m│[39m line1
+[1m[90m 2 [22m[39m[90m│[39m line2"
 `;
 
 exports[`<ConsoleBox> Single line 1`] = `"[1m[90m 1 [22m[39m[90m│[39m [33m12345[39m"`;

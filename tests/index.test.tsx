@@ -44,6 +44,59 @@ describe('<ConsoleBox>', () => {
     expect(lastFrame()).toMatchSnapshot()
   })
 
+  it('Long line', async () => {
+    const { callback, called } = waitCall()
+
+    const { lastFrame } = render(
+      <ConsoleBox
+        func={console => {
+          console.log(`l${'o'.repeat(300)}ng`)
+        }}
+        onSuccess={callback}
+        onFailed={callback}
+      />
+    )
+
+    await called
+    expect(lastFrame()).toMatchSnapshot()
+  })
+
+  it('Single console.log include new line', async () => {
+    const { callback, called } = waitCall()
+
+    const { lastFrame } = render(
+      <ConsoleBox
+        func={console => {
+          console.log('line1\nline2')
+        }}
+        onSuccess={callback}
+        onFailed={callback}
+      />
+    )
+
+    await called
+    expect(lastFrame()).toMatchSnapshot()
+  })
+
+  it('Hidden line number', async () => {
+    const { callback, called } = waitCall()
+
+    const { lastFrame } = render(
+      <ConsoleBox
+        func={console => {
+          console.log(12345)
+          console.log(12345)
+        }}
+        onSuccess={callback}
+        onFailed={callback}
+        showLineNumber={false}
+      />
+    )
+
+    await called
+    expect(lastFrame()).toMatchSnapshot()
+  })
+
   it('Error', async () => {
     const { callback, called } = waitCall()
 
